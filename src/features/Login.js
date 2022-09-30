@@ -12,7 +12,8 @@ function Login({ openRegister, closeLogin }) {
     openRegister();
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       await login(loginUser);
     } catch (err) {
@@ -24,40 +25,43 @@ function Login({ openRegister, closeLogin }) {
 
   return (
     <>
-      <div className='flex flex-col gap-3'>
-        <div className='flex justify-center'>
-          <input
-            value={loginUser.username}
-            onChange={(e) =>
-              setLoginUser({ ...loginUser, username: e.target.value })
-            }
-            placeholder='username'
-            className='text-center focus:outline-sky-500 h-8 w-full'
-          />
+      <form onSubmit={handleLogin}>
+        <div className='flex flex-col gap-3 items-center p-3'>
+          <div className='w-full'>
+            <input
+              value={loginUser.username}
+              onChange={(e) =>
+                setLoginUser({
+                  ...loginUser,
+                  username: e.target.value
+                })
+              }
+              className='h-10 w-full text-center outline-blue-500'
+              placeholder='username'
+            />
+          </div>
+          <div className='w-full'>
+            <input
+              value={loginUser.password}
+              onChange={(e) =>
+                setLoginUser({ ...loginUser, password: e.target.value })
+              }
+              className='h-10 w-full text-center outline-blue-500'
+              placeholder='password'
+            />
+          </div>
+          <button className='bg-blue-500 w-full h-10 text-lg text-white'>
+            Login
+          </button>
+          <button
+            type='button'
+            onClick={handleRegisterOpen}
+            className='bg-green-500 w-full h-10 text-lg text-white'
+          >
+            Register
+          </button>
         </div>
-        <div className='flex justify-center'>
-          <input
-            value={loginUser.password}
-            onChange={(e) =>
-              setLoginUser({ ...loginUser, password: e.target.value })
-            }
-            placeholder='password'
-            className='text-center focus:outline-sky-500 h-8 w-full'
-          />
-        </div>
-        <div
-          className='bg-blue-500 p-3 text-center mt-3 cursor-pointer'
-          onClick={handleLogin}
-        >
-          <button>Login</button>
-        </div>
-        <div
-          className='bg-green-500 p-3 text-center cursor-pointer'
-          onClick={handleRegisterOpen}
-        >
-          <button>Register Account</button>
-        </div>
-      </div>
+      </form>
     </>
   );
 }
