@@ -6,15 +6,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MovieContextProvider from './context/MovieContext';
+import LoadingContextProvider from './context/LoadingContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
-    <MovieContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </MovieContextProvider>
+    <LoadingContextProvider>
+      <MovieContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </MovieContextProvider>
+    </LoadingContextProvider>
   </AuthContextProvider>
 );
 
