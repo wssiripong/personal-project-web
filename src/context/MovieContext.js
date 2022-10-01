@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import * as movieService from '../api/movieApi';
 
 const MovieContext = createContext();
@@ -18,7 +18,7 @@ function MovieContextProvider({ children }) {
 
   return (
     <MovieContext.Provider
-      value={{ openAddMovie, toggleAddMovie, createMovie }}
+      value={{ openAddMovie, toggleAddMovie, createMovie, movies }}
     >
       {children}
     </MovieContext.Provider>

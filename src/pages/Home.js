@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
+import MovieContainer from '../components/MovieContainer';
 import { useAuth } from '../context/AuthContext';
 import { useMovie } from '../context/MovieContext';
 import AddMovie from '../features/AddMovie';
@@ -26,7 +27,9 @@ function Home() {
 
   return (
     <>
-      <div className='bg-blue-300'>This is Home page</div>
+      <div className='bg-blue-300'>
+        <MovieContainer />
+      </div>
 
       <Modal
         title='Login'
