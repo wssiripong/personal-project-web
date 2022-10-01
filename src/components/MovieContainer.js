@@ -14,11 +14,16 @@ function MovieContainer() {
 
   return (
     <>
-      <div className='grid grid-cols-5 container gap-3'>
+      <div className='grid grid-cols-9 gap-5'>
         {movies.map((item) => (
-          <div key={item.id} item={item} onClick={() => viewMovie(item)}>
+          <div
+            className='h-60 w-40'
+            key={item.id}
+            item={item}
+            onClick={() => viewMovie(item)}
+          >
             <img
-              className='object-cover h-60 w-40'
+              className='object-cover h-full w-full '
               src={item.coverImage}
               alt=''
             />
