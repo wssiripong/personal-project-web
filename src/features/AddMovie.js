@@ -45,7 +45,7 @@ function AddMovie() {
 
       startLoading();
 
-      const res = await createMovie(formData);
+      await createMovie(formData);
       toggleAddMovie();
       setTitle('');
       setCoverImage(null);
@@ -108,10 +108,10 @@ function AddMovie() {
           />
 
           {loading ? (
-            <button className='flex justify-center items-center bg-blue-500 h-10'>
+            <button className='flex justify-center items-center bg-blue-500 h-10 text-white'>
               <div role='status'>
                 <svg
-                  class='inline mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-blue-600 fill-gray-600 dark:fill-gray-300'
+                  className='inline mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-blue-600 fill-gray-600 dark:fill-gray-300'
                   viewBox='0 0 100 101'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
@@ -125,7 +125,7 @@ function AddMovie() {
                     fill='currentFill'
                   />
                 </svg>
-                <span class='sr-only'>Loading...</span>
+                <span className='sr-only'>Loading...</span>
               </div>
               Processing...
             </button>
@@ -136,7 +136,7 @@ function AddMovie() {
                 onClick={() => fileEl.current.click()}
                 className='bg-blue-500 h-10 text-white'
               >
-                upload image
+                {coverImage ? 'file selected' : 'upload image'}
               </button>
               <button className='bg-yellow-500 h-10 text-white'>Submit</button>
               <button

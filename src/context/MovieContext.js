@@ -1,17 +1,21 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as movieService from '../api/movieApi';
+import * as commentLikeService from '../api/commentLikeApi';
 
 const MovieContext = createContext();
 
 function MovieContextProvider({ children }) {
   const [openAddMovie, setOpenAddMovie] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [commentLikes, setCommentLikes] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await movieService.getAllMovies();
-        setMovies(res.data.movies);
+        const resMovies = await movieService.getAllMovies();
+        const resCommentLikes = await commentLikeService.getAllCommentLikes();
+        setMovies(resMovies.data.movies);
+        setCommentLikes(resCommentLikes.data.commentLikes);
       } catch (err) {
         console.log(err);
       }
@@ -30,7 +34,13 @@ function MovieContextProvider({ children }) {
 
   return (
     <MovieContext.Provider
-      value={{ openAddMovie, toggleAddMovie, createMovie, movies }}
+      value={{
+        openAddMovie,
+        toggleAddMovie,
+        createMovie,
+        movies,
+        commentLikes
+      }}
     >
       {children}
     </MovieContext.Provider>

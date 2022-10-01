@@ -13,7 +13,7 @@ function Home() {
 
   const { user } = useAuth();
 
-  const { openAddMovie } = useMovie();
+  const { openAddMovie, toggleAddMovie } = useMovie();
 
   useEffect(() => {
     if (user) {
@@ -48,7 +48,12 @@ function Home() {
         }
         open={openRegister}
       />
-      <Modal title='Add Movie' open={openAddMovie} body={<AddMovie />} />
+      <Modal
+        title='Add Movie'
+        open={openAddMovie}
+        body={<AddMovie />}
+        close={toggleAddMovie}
+      />
     </div>
   );
 }
