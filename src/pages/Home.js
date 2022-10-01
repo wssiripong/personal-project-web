@@ -26,11 +26,8 @@ function Home() {
   }, [user]);
 
   return (
-    <>
-      <div className='bg-blue-300'>
-        <MovieContainer />
-      </div>
-
+    <div className='p-10'>
+      <MovieContainer />
       <Modal
         title='Login'
         body={
@@ -52,7 +49,7 @@ function Home() {
         open={openRegister}
       />
       <Modal title='Add Movie' open={openAddMovie} body={<AddMovie />} />
-    </>
+    </div>
   );
 }
 

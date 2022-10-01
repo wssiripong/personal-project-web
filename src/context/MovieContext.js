@@ -7,6 +7,18 @@ function MovieContextProvider({ children }) {
   const [openAddMovie, setOpenAddMovie] = useState(false);
   const [movies, setMovies] = useState([]);
 
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await movieService.getAllMovies();
+        setMovies(res.data.movies);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchMovies();
+  }, []);
+
   const toggleAddMovie = () => {
     setOpenAddMovie((prev) => !prev);
   };

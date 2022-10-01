@@ -41,12 +41,13 @@ function AddMovie() {
       formData.append('description', description);
       formData.append('coverImage', coverImage);
 
-      await createMovie(formData);
+      const res = await createMovie(formData);
       toggleAddMovie();
       setTitle('');
       setCoverImage(null);
       setCategory('');
       setDescription('');
+
       toast.success('movie added successfully');
     } catch (err) {
       console.log(err);
