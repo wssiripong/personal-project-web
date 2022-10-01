@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
 import { useAuth } from '../context/AuthContext';
+import { useMovie } from '../context/MovieContext';
+import AddMovie from '../features/AddMovie';
 import Login from '../features/Login';
 import Register from '../features/Register';
 
@@ -9,6 +11,8 @@ function Home() {
   const [openRegister, setOpenRegister] = useState(false);
 
   const { user } = useAuth();
+
+  const { openAddMovie } = useMovie();
 
   useEffect(() => {
     if (user) {
@@ -23,6 +27,7 @@ function Home() {
   return (
     <>
       <div className='bg-blue-300'>This is Home page</div>
+
       <Modal
         title='Login'
         body={
@@ -43,6 +48,7 @@ function Home() {
         }
         open={openRegister}
       />
+      <Modal title='Add Movie' open={openAddMovie} body={<AddMovie />} />
     </>
   );
 }

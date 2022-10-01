@@ -5,13 +5,16 @@ import AuthContextProvider from './context/AuthContext';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MovieContextProvider from './context/MovieContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <MovieContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MovieContextProvider>
   </AuthContextProvider>
 );
 
