@@ -25,6 +25,15 @@ function AuthContextProvider({ children }) {
     fetchMe();
   }, []);
 
+  const getUser = async (userId) => {
+    try {
+      const res = await authService.getUser(userId);
+      return res.data.user;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getMe = async () => {
     const res = await authService.getMe();
     setUser(res.data.user);
@@ -48,7 +57,7 @@ function AuthContextProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ register, login, user, logout }}>
+    <AuthContext.Provider value={{ register, login, user, logout, getUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -13,7 +13,7 @@ function Modal({ title, body, open, close }) {
       onClick={!user ? null : close ? close : null}
     >
       <div
-        className=' bg-slate-200 p-5 w-[350px]'
+        className=' bg-slate-200 p-5 w-[350px] fadein'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='text-center pb-5'>

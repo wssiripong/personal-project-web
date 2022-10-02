@@ -15,7 +15,7 @@ function MovieContainer() {
   return (
     <>
       <div className='grid grid-cols-9 gap-5'>
-        {movies.map((item) => (
+        {movies?.map((item) => (
           <div
             className='h-60 w-40'
             key={item.id}

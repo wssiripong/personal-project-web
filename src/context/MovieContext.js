@@ -28,12 +28,19 @@ function MovieContextProvider({ children }) {
     setMovies([res.data.movie, ...movies]);
   };
 
+  const deleteMovie = async (id) => {
+    await movieService.deleteMovie(id);
+    const res = movies.filter((item) => item.id !== id);
+    setMovies(res);
+  };
+
   return (
     <MovieContext.Provider
       value={{
         openAddMovie,
         toggleAddMovie,
         createMovie,
+        deleteMovie,
         movies
       }}
     >
