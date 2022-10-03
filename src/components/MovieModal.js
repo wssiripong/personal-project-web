@@ -1,16 +1,14 @@
 import { toast } from 'react-toastify';
-import { useLoading } from '../context/LoadingContext';
 
 import { useMovie } from '../context/MovieContext';
 import CommentContainer from '../features/comment/CommentContainer';
 
 function MovieModal({
   open,
-  movieInfo: { id, coverImage, title, description, Comments },
+  movieInfo: { id, coverImage, title, description },
   close
 }) {
   const { deleteMovie } = useMovie();
-  const { loading, startLoading, stopLoading } = useLoading();
 
   const handleDelete = async () => {
     try {
@@ -44,20 +42,18 @@ function MovieModal({
             alt=''
           />
           <div className='flex-1'>
-            <div className='flex flex-col h-full'>
+            <div className='flex flex-col h-full relative'>
               <div className='h-1/2 text-center'>{description}</div>
-              <div className='text-center'>
-                <button
-                  onClick={handleDelete}
-                  className='bg-red-500 h-10 w-16 text-white'
-                >
-                  Delete
-                </button>
-              </div>
+              <button
+                onClick={handleDelete}
+                className='bg-red-500 h-10 w-10 text-white absolute right-[235px] top-[5px] rounded-full opacity-70 hover:opacity-100'
+              >
+                X
+              </button>
             </div>
           </div>
         </div>
-        <CommentContainer movieId={id} comments={Comments} />
+        <CommentContainer movieId={id} />
       </div>
     </div>
   );

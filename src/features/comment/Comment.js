@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as commentLikeService from '../../api/commentLikeApi';
 import { useAuth } from '../../context/AuthContext';
 
-function Comment({ item: { id, title, userId } }) {
+function Comment({ item: { id, title, userId }, deleteComment }) {
   const [commentLikes, setCommentLikes] = useState([]);
   const [commentUser, setCommentUser] = useState({});
 
@@ -30,20 +30,25 @@ function Comment({ item: { id, title, userId } }) {
       }
     };
     getUserInfo();
-  }, []);
+  }, [userId, getUser]);
 
   return (
-    <div className='flex justify-between p-2 bg-yellow-300 text-black'>
-      <div>
+    <div className='flex p-2 items-center bg-yellow-300 text-black'>
+      <div className='w-32'>
         {commentUser.firstName} {commentUser.lastName}
       </div>
-      <div>{title}</div>
-      <div>
-        {
-          commentLikes?.map((item) => (item.commentId === id ? item.id : ''))
-            .length
-        }
+      <div className='w-60 px-2 break-words'>{title}</div>
+      <div className='w-10 p-2 text-end'>
+        {commentLikes?.filter((item) => item.commentId === id).length === 0
+          ? ''
+          : commentLikes?.filter((item) => item.commentId === id).length}
       </div>
+      <button
+        onClick={() => deleteComment(id)}
+        className='bg-red-500 p-2 h-10 text-white'
+      >
+        delete
+      </button>
     </div>
   );
 }
