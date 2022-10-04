@@ -26,34 +26,36 @@ function Home() {
   }, [user]);
 
   return (
-    <div className='p-10'>
-      <MovieContainer />
-      <Modal
-        title='Login'
-        body={
-          <Login
-            openRegister={() => setOpenRegister(true)}
-            closeLogin={() => setOpenLogin(false)}
-          />
-        }
-        open={openLogin}
-      />
-      <Modal
-        title='Register'
-        body={
-          <Register
-            closeRegister={() => setOpenRegister(false)}
-            openLogin={() => setOpenLogin(true)}
-          />
-        }
-        open={openRegister}
-      />
-      <Modal
-        title='Add Movie'
-        open={openAddMovie}
-        body={<AddMovie />}
-        close={toggleAddMovie}
-      />
+    <div className=' bg-teal-900 h-[100vh] flex justify-center items-center'>
+      <div className='w-[200vh] h-[100vh] bg-teal-800 p-10'>
+        <MovieContainer />
+        <Modal
+          title='Login'
+          body={
+            <Login
+              openRegister={() => setOpenRegister(true)}
+              closeLogin={() => setOpenLogin(false)}
+            />
+          }
+          open={openLogin}
+        />
+        <Modal
+          title='Register'
+          body={
+            <Register
+              closeRegister={() => setOpenRegister(false)}
+              openLogin={() => setOpenLogin(true)}
+            />
+          }
+          open={openRegister}
+        />
+        <Modal
+          title='Add Movie'
+          open={openAddMovie}
+          body={<AddMovie />}
+          close={toggleAddMovie}
+        />
+      </div>
     </div>
   );
 }

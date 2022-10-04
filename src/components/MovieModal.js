@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
 
 import { useMovie } from '../context/MovieContext';
 import CommentContainer from '../features/comment/CommentContainer';
@@ -9,11 +10,13 @@ function MovieModal({
   close
 }) {
   const { deleteMovie } = useMovie();
+  const { user } = useAuth();
 
   const handleDelete = async () => {
     try {
       await deleteMovie(id);
       close();
+      toast.success('delete successful');
     } catch (err) {
       toast.error(err.response?.data.message);
     }
@@ -44,12 +47,16 @@ function MovieModal({
           <div className='flex-1'>
             <div className='flex flex-col h-full relative'>
               <div className='h-1/2 text-center'>{description}</div>
-              <button
-                onClick={handleDelete}
-                className='bg-red-500 h-10 w-10 text-white absolute right-[235px] top-[5px] rounded-full opacity-70 hover:opacity-100'
-              >
-                X
-              </button>
+              {user.role === 'ADMIN' ? (
+                <button
+                  onClick={handleDelete}
+                  className='bg-red-500 h-10 w-10 text-white absolute right-[235px] top-[5px] rounded-full opacity-70 hover:opacity-100'
+                >
+                  X
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>

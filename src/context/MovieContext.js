@@ -6,6 +6,7 @@ const MovieContext = createContext();
 function MovieContextProvider({ children }) {
   const [openAddMovie, setOpenAddMovie] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [openSideModal, setOpenSideModal] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -21,6 +22,10 @@ function MovieContextProvider({ children }) {
 
   const toggleAddMovie = () => {
     setOpenAddMovie((prev) => !prev);
+  };
+
+  const toggleSideModal = () => {
+    setOpenSideModal((prev) => !prev);
   };
 
   const createMovie = async (input) => {
@@ -41,7 +46,9 @@ function MovieContextProvider({ children }) {
         toggleAddMovie,
         createMovie,
         deleteMovie,
-        movies
+        movies,
+        openSideModal,
+        toggleSideModal
       }}
     >
       {children}

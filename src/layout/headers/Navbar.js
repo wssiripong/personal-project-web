@@ -6,13 +6,10 @@ function Navbar() {
   const { toggleAddMovie } = useMovie();
 
   return (
-    <div className='fixed top-0 left-0 right-0 bg-yellow-500 h-16'>
-      <div className='flex justify-between items-center h-full text-white'>
+    <div className='fixed top-0 left-0 w-[250px] bottom-0 bg-teal-900 p-5 shadow-md border-r-teal-700 border-r-2'>
+      <div className='h-full text-white'>
         {user?.role === 'ADMIN' ? (
-          <div
-            className='text-2xl pl-3 cursor-pointer'
-            onClick={toggleAddMovie}
-          >
+          <div className='text-2xl cursor-pointer' onClick={toggleAddMovie}>
             Add Movie
           </div>
         ) : (
@@ -20,7 +17,7 @@ function Navbar() {
         )}
         <div>
           {user && (
-            <div className='text-2xl pr-3 cursor-pointer' onClick={logout}>
+            <div className='text-2xl cursor-pointer' onClick={logout}>
               Log out
             </div>
           )}
