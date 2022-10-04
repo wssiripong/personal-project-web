@@ -26,8 +26,8 @@ function Home() {
   }, [user]);
 
   return (
-    <div className=' bg-teal-900 h-[100vh] flex justify-center items-center'>
-      <div className='w-[200vh] h-[100vh] bg-teal-800 p-10'>
+    <div className=' bg-teal-800 h-[100vh] flex justify-center items-center'>
+      <div className='w-[200vh] h-[100vh] p-10'>
         <MovieContainer />
         <Modal
           title='Login'
