@@ -1,21 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as movieService from '../api/movieApi';
-import * as commentService from '../api/commentApi';
 
 const MovieContext = createContext();
 
 function MovieContextProvider({ children }) {
   const [openAddMovie, setOpenAddMovie] = useState(false);
   const [movies, setMovies] = useState([]);
-
-  const updateComment = async (input) => {
-    try {
-      const res = await commentService.updateComment(input);
-      return res;
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -51,8 +41,7 @@ function MovieContextProvider({ children }) {
         toggleAddMovie,
         createMovie,
         deleteMovie,
-        movies,
-        updateComment
+        movies
       }}
     >
       {children}

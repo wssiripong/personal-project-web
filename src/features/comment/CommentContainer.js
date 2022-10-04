@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useMovie } from '../../context/MovieContext';
 import CommentList from './CommentList';
 import * as commentService from '../../api/commentApi';
 
 function CommentContainer({ movieId }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
-  const { updateComment } = useMovie();
 
   const {
     user: { id }
@@ -26,9 +24,18 @@ function CommentContainer({ movieId }) {
     fetchAllComments();
   }, []);
 
-  const addComment = async () => {
+  const addComment = async (input) => {
     try {
-      const res = await updateComment({ userId: id, movieId, title: comment });
+      const res = await commentService.addComment(input);
+      return res;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleAddComment = async () => {
+    try {
+      const res = await addComment({ userId: id, movieId, title: comment });
       setComments([...comments, res.data.comment]);
       setComment('');
     } catch (err) {
@@ -36,11 +43,21 @@ function CommentContainer({ movieId }) {
     }
   };
 
-  const deleteComment = async (commentId) => {
+  const adminDeleteComment = async (commentId) => {
     try {
-      await commentService.deleteComment(commentId);
+      await commentService.adminDeleteComment(commentId);
       const newComments = comments.filter((item) => item.id !== commentId);
-      setComments([newComments]);
+      setComments(newComments);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteComment = async (commentId, userId) => {
+    try {
+      await commentService.deleteComment(commentId, userId);
+      const newComments = comments.filter((item) => item.id !== commentId);
+      setComments(newComments);
     } catch (err) {
       console.log(err);
     }
@@ -52,6 +69,7 @@ function CommentContainer({ movieId }) {
         <CommentList
           movieId={movieId}
           comments={comments}
+          adminDeleteComment={adminDeleteComment}
           deleteComment={deleteComment}
         />
       </div>
@@ -62,7 +80,7 @@ function CommentContainer({ movieId }) {
           className='w-5/6 -mb-[5px] p-2 h-14 text-center outline-blue-500 rounded-md '
         />
         <button
-          onClick={addComment}
+          onClick={handleAddComment}
           className='bg-blue-500 text-white w-16 h-full rounded-md hover:opacity-100 hover:scale-110'
         >
           POST

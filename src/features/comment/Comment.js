@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import * as commentLikeService from '../../api/commentLikeApi';
 import { useAuth } from '../../context/AuthContext';
 
-function Comment({ item: { id, title, userId }, deleteComment }) {
+function Comment({
+  item: { id, title, userId },
+  adminDeleteComment,
+  deleteComment
+}) {
   const [commentLikes, setCommentLikes] = useState([]);
   const [commentUser, setCommentUser] = useState({});
 
-  const { getUser } = useAuth();
+  const { getUser, user } = useAuth();
 
   useEffect(() => {
     const fetchCommentLikes = async () => {
@@ -43,12 +47,31 @@ function Comment({ item: { id, title, userId }, deleteComment }) {
           ? ''
           : commentLikes?.filter((item) => item.commentId === id).length}
       </div>
-      <button
-        onClick={() => deleteComment(id)}
-        className='bg-red-500 p-2 h-10 text-white'
-      >
-        delete
-      </button>
+      {commentUser.id === user.id ? (
+        <button
+          onClick={
+            user.role === 'ADMIN'
+              ? () => adminDeleteComment(id)
+              : () => deleteComment(id, user.id)
+          }
+          className='bg-red-500 p-2 h-10 text-white'
+        >
+          delete
+        </button>
+      ) : user.role === 'ADMIN' ? (
+        <button
+          onClick={
+            user.role === 'ADMIN'
+              ? () => adminDeleteComment(id)
+              : () => deleteComment(id, user.id)
+          }
+          className='bg-red-500 p-2 h-10 text-white'
+        >
+          delete
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
