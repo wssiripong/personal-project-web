@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-function Register({ closeRegister, openLogin }) {
+function Register({ toggleLogin, toggleRegister }) {
   const [registerUser, setRegisterUser] = useState({
     username: '',
     password: '',
@@ -18,6 +18,7 @@ function Register({ closeRegister, openLogin }) {
     try {
       e.preventDefault();
       await register(registerUser);
+      toggleRegister();
       toast.success('register successful');
     } catch (err) {
       toast.error(err.response.data.message);
@@ -25,8 +26,8 @@ function Register({ closeRegister, openLogin }) {
   };
 
   const handleReturnLogin = () => {
-    closeRegister();
-    openLogin();
+    toggleLogin();
+    toggleRegister();
   };
 
   return (

@@ -44,10 +44,11 @@ function MovieModal({
             className='h-60 w-40 object-cover flex-1'
             alt=''
           />
+
           <div className='flex-1'>
             <div className='flex flex-col h-full relative'>
               <div className='h-1/2 text-center'>{description}</div>
-              {user.role === 'ADMIN' ? (
+              {user?.role === 'ADMIN' ? (
                 <button
                   onClick={handleDelete}
                   className='bg-red-500 h-10 w-10 text-white absolute right-[235px] top-[5px] rounded-full opacity-70 hover:opacity-100'
@@ -60,7 +61,7 @@ function MovieModal({
             </div>
           </div>
         </div>
-        <CommentContainer movieId={id} />
+        <CommentContainer movieId={id} movieModalClose={close} />
       </div>
     </div>
   );

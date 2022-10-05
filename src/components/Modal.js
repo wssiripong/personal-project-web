@@ -1,8 +1,4 @@
-import { useAuth } from '../context/AuthContext';
-
 function Modal({ title, body, open, close }) {
-  const { user } = useAuth();
-
   if (!open) {
     return null;
   }
@@ -10,7 +6,7 @@ function Modal({ title, body, open, close }) {
   return (
     <div
       className='fixed top-0 bottom-0 left-0 right-0 backdrop-blur bg-black bg-opacity-50 flex items-center justify-center'
-      onClick={!user ? null : close ? close : null}
+      onClick={close}
     >
       <div
         className=' bg-slate-200 p-5 w-[350px] fadein'

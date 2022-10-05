@@ -10,6 +10,8 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -56,8 +58,28 @@ function AuthContextProvider({ children }) {
     removeAccessToken();
   };
 
+  const toggleLogin = () => {
+    setOpenLogin((prev) => !prev);
+  };
+
+  const toggleRegister = () => {
+    setOpenRegister((prev) => !prev);
+  };
+
   return (
-    <AuthContext.Provider value={{ register, login, user, logout, getUser }}>
+    <AuthContext.Provider
+      value={{
+        openLogin,
+        openRegister,
+        toggleLogin,
+        toggleRegister,
+        register,
+        login,
+        user,
+        logout,
+        getUser
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

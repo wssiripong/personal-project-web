@@ -47,23 +47,23 @@ function Comment({
           ? ''
           : commentLikes?.filter((item) => item.commentId === id).length}
       </div>
-      {commentUser.id === user.id ? (
+      {commentUser.id === user?.id ? (
         <button
           onClick={
-            user.role === 'ADMIN'
+            user?.role === 'ADMIN'
               ? () => adminDeleteComment(id)
-              : () => deleteComment(id, user.id)
+              : () => deleteComment(id, user?.id)
           }
           className='bg-red-500 p-2 h-10 text-white'
         >
           delete
         </button>
-      ) : user.role === 'ADMIN' ? (
+      ) : user?.role === 'ADMIN' ? (
         <button
           onClick={
-            user.role === 'ADMIN'
+            user?.role === 'ADMIN'
               ? () => adminDeleteComment(id)
-              : () => deleteComment(id, user.id)
+              : () => deleteComment(id, user?.id)
           }
           className='bg-red-500 p-2 h-10 text-white'
         >

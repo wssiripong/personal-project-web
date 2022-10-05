@@ -2,20 +2,21 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
-function Login({ openRegister, closeLogin }) {
+function Login({ toggleLogin, toggleRegister }) {
   const [loginUser, setLoginUser] = useState({ username: '', password: '' });
 
   const { login } = useAuth();
 
   const handleRegisterOpen = () => {
-    closeLogin();
-    openRegister();
+    toggleLogin();
+    toggleRegister();
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await login(loginUser);
+      toggleLogin();
     } catch (err) {
       toast.error(err.response.data.message);
     } finally {

@@ -23,11 +23,11 @@ function MovieContainer() {
             onClick={() => viewMovie(item)}
           >
             <img
-              className='object-cover h-full w-full '
+              className='object-cover h-full w-full rounded-lg'
               src={item.coverImage}
               alt=''
             />
-            <div className='h-full w-full absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-white font-medium opacity-0 hover:opacity-100 hover:bg-black/30 hover:backdrop-blur-[1px] transition-all ease-in-out'>
+            <div className='h-full w-full absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-white font-medium opacity-0 hover:opacity-100 hover:bg-black/30 hover:backdrop-blur-[1px] transition-all ease-in-out rounded-lg'>
               {item.title}
             </div>
           </div>

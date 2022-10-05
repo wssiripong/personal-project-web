@@ -3,13 +3,11 @@ import { useAuth } from '../../context/AuthContext';
 import CommentList from './CommentList';
 import * as commentService from '../../api/commentApi';
 
-function CommentContainer({ movieId }) {
+function CommentContainer({ movieId, movieModalClose }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
 
-  const {
-    user: { id }
-  } = useAuth();
+  const { user, toggleLogin } = useAuth();
 
   const fetchAllComments = async () => {
     try {
@@ -35,7 +33,11 @@ function CommentContainer({ movieId }) {
 
   const handleAddComment = async () => {
     try {
-      const res = await addComment({ userId: id, movieId, title: comment });
+      const res = await addComment({
+        userId: user?.id,
+        movieId,
+        title: comment
+      });
       setComments([...comments, res.data.comment]);
       setComment('');
     } catch (err) {
@@ -63,6 +65,11 @@ function CommentContainer({ movieId }) {
     }
   };
 
+  const handleSignIn = () => {
+    movieModalClose();
+    toggleLogin();
+  };
+
   return (
     <div>
       <div className='bg-blue-500 mt-5 p-2'>
@@ -73,14 +80,17 @@ function CommentContainer({ movieId }) {
           deleteComment={deleteComment}
         />
       </div>
-      <div className='pt-2 mt-2 h-16 flex justify-between gap-2'>
+      <div
+        onClick={user ? null : handleSignIn}
+        className='pt-2 mt-2 h-16 flex justify-between gap-2'
+      >
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className='w-5/6 -mb-[5px] p-2 h-14 text-center outline-blue-500 rounded-md '
         />
         <button
-          onClick={handleAddComment}
+          onClick={user ? handleAddComment : null}
           className='bg-blue-500 text-white w-16 h-full rounded-md hover:opacity-100 hover:scale-110'
         >
           POST

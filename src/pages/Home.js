@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Modal from '../components/Modal';
 import MovieContainer from '../components/MovieContainer';
 import { useAuth } from '../context/AuthContext';
@@ -8,22 +7,9 @@ import Login from '../features/Login';
 import Register from '../features/Register';
 
 function Home() {
-  const [openLogin, setOpenLogin] = useState(true);
-  const [openRegister, setOpenRegister] = useState(false);
-
-  const { user } = useAuth();
+  const { openLogin, openRegister, toggleLogin, toggleRegister } = useAuth();
 
   const { openAddMovie, toggleAddMovie } = useMovie();
-
-  useEffect(() => {
-    if (user) {
-      setOpenLogin(false);
-      setOpenRegister(false);
-    }
-    if (!user) {
-      setOpenLogin(true);
-    }
-  }, [user]);
 
   return (
     <div className=' bg-teal-800 h-[100vh] flex justify-center items-center'>
@@ -32,22 +18,21 @@ function Home() {
         <Modal
           title='Login'
           body={
-            <Login
-              openRegister={() => setOpenRegister(true)}
-              closeLogin={() => setOpenLogin(false)}
-            />
+            <Login toggleLogin={toggleLogin} toggleRegister={toggleRegister} />
           }
           open={openLogin}
+          close={toggleLogin}
         />
         <Modal
           title='Register'
           body={
             <Register
-              closeRegister={() => setOpenRegister(false)}
-              openLogin={() => setOpenLogin(true)}
+              toggleLogin={toggleLogin}
+              toggleRegister={toggleRegister}
             />
           }
           open={openRegister}
+          close={toggleRegister}
         />
         <Modal
           title='Add Movie'
