@@ -72,7 +72,7 @@ function CommentContainer({ movieId, movieModalClose }) {
 
   return (
     <div>
-      <div className='bg-blue-500 mt-5 p-2'>
+      <div className='p-2'>
         <CommentList
           movieId={movieId}
           comments={comments}

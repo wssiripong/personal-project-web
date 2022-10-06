@@ -1,8 +1,9 @@
+import Avatar from '../../components/Avatar';
 import { useAuth } from '../../context/AuthContext';
 import { useMovie } from '../../context/MovieContext';
 
 function Navbar() {
-  const { user, logout, toggleLogin } = useAuth();
+  const { user, logout, toggleLogin, toggleProfileModal } = useAuth();
   const { toggleAddMovie } = useMovie();
 
   return (
@@ -39,6 +40,14 @@ function Navbar() {
         <div className='cursor-pointer hover:scale-125'>Thiller</div>
         <div className='cursor-pointer hover:scale-125'>TV shows</div>
         <div className='border-[1px] border-teal-700 w-full my-3'></div>
+        {user && (
+          <div
+            onClick={toggleProfileModal}
+            className='cursor-pointer w-[80px] h-[80px]'
+          >
+            <Avatar size='80' src={user.profileImage} />
+          </div>
+        )}
       </div>
       <div className='h-full text-white flex justify-evenly'>
         {user?.role === 'ADMIN' ? (

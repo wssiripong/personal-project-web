@@ -12,6 +12,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
+  const [openProfileModal, setOpenProfileModal] = useState(false);
 
   useEffect(() => {
     const fetchMe = async () => {
@@ -66,6 +67,9 @@ function AuthContextProvider({ children }) {
     setOpenRegister((prev) => !prev);
   };
 
+  const toggleProfileModal = () => {
+    setOpenProfileModal((prev) => !prev);
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -77,7 +81,10 @@ function AuthContextProvider({ children }) {
         login,
         user,
         logout,
-        getUser
+        getUser,
+        getMe,
+        openProfileModal,
+        toggleProfileModal
       }}
     >
       {children}

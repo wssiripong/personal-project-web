@@ -1,5 +1,6 @@
 import Modal from '../components/Modal';
 import MovieContainer from '../components/MovieContainer';
+import ProfileModal from '../components/ProfileModal';
 import { useAuth } from '../context/AuthContext';
 import { useMovie } from '../context/MovieContext';
 import AddMovie from '../features/AddMovie';
@@ -7,7 +8,14 @@ import Login from '../features/Login';
 import Register from '../features/Register';
 
 function Home() {
-  const { openLogin, openRegister, toggleLogin, toggleRegister } = useAuth();
+  const {
+    openLogin,
+    openRegister,
+    toggleLogin,
+    toggleRegister,
+    toggleProfileModal,
+    openProfileModal
+  } = useAuth();
 
   const { openAddMovie, toggleAddMovie } = useMovie();
 
@@ -40,6 +48,7 @@ function Home() {
           body={<AddMovie />}
           close={toggleAddMovie}
         />
+        <ProfileModal open={openProfileModal} close={toggleProfileModal} />
       </div>
     </div>
   );
