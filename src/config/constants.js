@@ -1,0 +1,12 @@
+export const CATEGORY_ANIME = 'ANIME';
+export const CATEGORY_CRIME = 'CRIME';
+export const CATEGORY_DRAMA = 'DRAMA';
+export const CATEGORY_THRILLER = 'THRILLER';
+export const CATEGORY_HORROR = 'HORROR';
+export const CATEGORY_FAMILY = 'FAMILY';
+export const CATEGORY_TV_SHOWS = 'TV_SHOWS';
+export const CATEGORY_ROMANCE = 'ROMANCE';
+export const CATEGORY_COMEDY = 'COMEDY';
+export const CATEGORY_FANTASY = 'FANTASY';
+export const CATEGORY_ACTION = 'ACTION';
+export const CATEGORY_DOCUMENTARY = 'DOCUMENTARY';

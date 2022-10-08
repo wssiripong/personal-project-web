@@ -4,6 +4,20 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLoading } from '../context/LoadingContext';
 import { useMovie } from '../context/MovieContext';
+import {
+  CATEGORY_ACTION,
+  CATEGORY_DRAMA,
+  CATEGORY_ANIME,
+  CATEGORY_COMEDY,
+  CATEGORY_CRIME,
+  CATEGORY_DOCUMENTARY,
+  CATEGORY_FAMILY,
+  CATEGORY_FANTASY,
+  CATEGORY_HORROR,
+  CATEGORY_ROMANCE,
+  CATEGORY_THRILLER,
+  CATEGORY_TV_SHOWS
+} from '../config/constants';
 
 function AddMovie() {
   const [title, setTitle] = useState('');
@@ -77,18 +91,18 @@ function AddMovie() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value=''>choose category</option>
-            <option value='ACTION'>Action</option>
-            <option value='ANIME'>Anime</option>
-            <option value='COMEDY'>Comedy</option>
-            <option value='CRIME'>Crime</option>
-            <option value='DOCUMENTARY'>Documentary</option>
-            <option value='DRAMA'>Drama</option>
-            <option value='FAMILY'>Family</option>
-            <option value='FANTASY'>Fantasy</option>
-            <option value='HORROR'>Horror</option>
-            <option value='ROMANCE'>Romance</option>
-            <option value='THRILLER'>Thriller</option>
-            <option value='TV_SHOWS'>TV Shows</option>
+            <option value={CATEGORY_ACTION}>Action</option>
+            <option value={CATEGORY_ANIME}>Anime</option>
+            <option value={CATEGORY_COMEDY}>Comedy</option>
+            <option value={CATEGORY_CRIME}>Crime</option>
+            <option value={CATEGORY_DOCUMENTARY}>Documentary</option>
+            <option value={CATEGORY_DRAMA}>Drama</option>
+            <option value={CATEGORY_FAMILY}>Family</option>
+            <option value={CATEGORY_FANTASY}>Fantasy</option>
+            <option value={CATEGORY_HORROR}>Horror</option>
+            <option value={CATEGORY_ROMANCE}>Romance</option>
+            <option value={CATEGORY_THRILLER}>Thriller</option>
+            <option value={CATEGORY_TV_SHOWS}>TV Shows</option>
           </select>
           <textarea
             className='h-20 text-center outline-blue-500'
