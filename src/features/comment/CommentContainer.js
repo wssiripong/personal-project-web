@@ -91,7 +91,7 @@ function CommentContainer({ movieId, movieModalClose }) {
         />
         <button
           onClick={user ? handleAddComment : null}
-          className='bg-blue-500 text-white w-16 h-full rounded-md hover:opacity-100 hover:scale-110'
+          className='bg-blue-500 text-white text-base font-bangers font-medium w-16 h-full rounded-md hover:opacity-100 hover:scale-110 active:scale-95 transition-all'
         >
           POST
         </button>

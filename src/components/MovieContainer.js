@@ -14,7 +14,7 @@ function MovieContainer() {
 
   return (
     <>
-      <div className='grid grid-cols-9 gap-5'>
+      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-8 gap-5'>
         {movies?.map((item) => (
           <div
             className='h-60 w-40 shadow-2xl hover:scale-110 transition-all ease-in-out relative'
@@ -27,7 +27,7 @@ function MovieContainer() {
               src={item.coverImage}
               alt=''
             />
-            <div className='h-full w-full absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-white font-medium opacity-0 hover:opacity-100 hover:bg-black/30 hover:backdrop-blur-[1px] transition-all ease-in-out rounded-lg'>
+            <div className='h-full w-full p-5 text-center absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-white font-medium opacity-0 hover:opacity-100 hover:bg-black/30 hover:backdrop-blur-[1px] transition-all ease-in-out rounded-lg'>
               {item.title}
             </div>
           </div>

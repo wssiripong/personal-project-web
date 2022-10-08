@@ -1,13 +1,27 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import * as userServicec from '../api/userApi';
+import * as userService from '../api/userApi';
+import * as watchlistService from '../api/watchlistApi';
 import Avatar from './Avatar';
 import { useLoading } from '../context/LoadingContext';
+import SaveIcon from './svg/SaveIcon';
+import PhotoIcon from './svg/PhotoIcon';
+import EditIcon from './svg/EditIcon';
+import { useMovie } from '../context/MovieContext';
+import MovieModal from './MovieModal';
 
 function ProfileModal({ open, close }) {
   const [edit, setEdit] = useState(false);
-  const [editInput, setEditInput] = useState({});
+  const [editInput, setEditInput] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    profileImage: null
+  });
+  const [isOpen, setIsOpen] = useState(false);
+  const [pick, setPick] = useState({});
   const { user, getMe } = useAuth();
+  const { movies } = useMovie();
   const { loading, startLoading, stopLoading } = useLoading();
   const selectFileEl = useRef();
 
@@ -27,13 +41,18 @@ function ProfileModal({ open, close }) {
       if (input.profileImage) {
         formData.append('profileImage', input.profileImage);
       }
-      await userServicec.updateUser(formData);
+      await userService.updateUser(formData);
       await getMe();
       setEdit(false);
       stopLoading();
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const viewMovie = (input) => {
+    setPick(input);
+    setIsOpen(true);
   };
 
   if (!open) {
@@ -60,25 +79,7 @@ function ProfileModal({ open, close }) {
               onClick={() => selectFileEl.current.click()}
               className='absolute top-[70px] right-[63px]'
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                className='w-6 h-6 text-teal-500 cursor-pointer'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z'
-                />
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z'
-                />
-              </svg>
+              <PhotoIcon />
             </div>
             <input
               type='file'
@@ -123,7 +124,7 @@ function ProfileModal({ open, close }) {
             <div>{user.lastName}</div>
           )}
         </div>
-        <div className='border-2 w-80 my-3'></div>
+        <div className='border-2 w-full my-3'></div>
         {edit ? (
           <input
             type='text'
@@ -140,42 +141,44 @@ function ProfileModal({ open, close }) {
           }}
           className='absolute top-3 right-3'
         >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth='1.5'
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125'
-            />
-          </svg>
+          <EditIcon />
         </button>
         {edit && (
           <button
             className='absolute top-3 right-14'
             onClick={() => updateUser(editInput)}
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='1.5'
-              stroke='currentColor'
-              className='w-6 h-6'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3'
-              />
-            </svg>
+            <SaveIcon />
           </button>
         )}
+        <div className='flex flex-wrap justify-center max-w-[600px] gap-3 font-sans text-sm'>
+          {movies.map((item) => {
+            if (item.Watchlists.find((s) => s.userId === user.id)) {
+              return (
+                <div
+                  className='mt-5 h-[135px] w-[90px] shadow-2xl hover:scale-110 transition-all ease-in-out relative'
+                  key={item.id}
+                  item={item}
+                  onClick={() => viewMovie(item)}
+                >
+                  <img
+                    className='object-cover h-full w-full rounded-lg'
+                    src={item.coverImage}
+                    alt=''
+                  />
+                  <div className='h-full w-full p-5 text-center absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-white font-medium opacity-0 hover:opacity-100 hover:bg-black/30 hover:backdrop-blur-[1px] transition-all ease-in-out rounded-lg'>
+                    {item.title}
+                  </div>
+                </div>
+              );
+            }
+          })}
+          <MovieModal
+            open={isOpen}
+            movieInfo={pick}
+            close={() => setIsOpen(false)}
+          />
+        </div>
       </div>
     </div>
   );

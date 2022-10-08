@@ -21,7 +21,7 @@ function Home() {
 
   return (
     <div className=' bg-teal-800 h-[100vh] flex justify-center items-center'>
-      <div className='w-[200vh] h-[100vh] p-10'>
+      <div className='container h-[100vh] py-10 px-10'>
         <MovieContainer />
         <Modal
           title='Login'

@@ -7,6 +7,7 @@ function MovieContextProvider({ children }) {
   const [openAddMovie, setOpenAddMovie] = useState(false);
   const [movies, setMovies] = useState([]);
   const [openSideModal, setOpenSideModal] = useState(false);
+  const [watchlists, setWatchlists] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -18,7 +19,7 @@ function MovieContextProvider({ children }) {
       }
     };
     fetchMovies();
-  }, []);
+  }, [watchlists]);
 
   const toggleAddMovie = () => {
     setOpenAddMovie((prev) => !prev);
@@ -39,6 +40,10 @@ function MovieContextProvider({ children }) {
     setMovies(res);
   };
 
+  const updateWatchlists = (input) => {
+    setWatchlists(input);
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -48,7 +53,9 @@ function MovieContextProvider({ children }) {
         deleteMovie,
         movies,
         openSideModal,
-        toggleSideModal
+        toggleSideModal,
+        watchlists,
+        updateWatchlists
       }}
     >
       {children}
