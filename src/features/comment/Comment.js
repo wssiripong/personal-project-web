@@ -69,7 +69,7 @@ function Comment({
         <div className=' px-5 py-2 break-words max-w-[300px]'>{title}</div>
         {user &&
           (user?.id === commentUser.id ? null : commentLikes.find(
-              (item) => item.userId === user.id
+              (item) => item.userId === user.id && item.commentId === id
             ) ? (
             <div onClick={handleUnClickLike}>
               <LikeIcon liked={true} />
