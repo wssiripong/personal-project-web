@@ -61,58 +61,64 @@ function Comment({
   };
 
   return (
-    <div className='flex items-start justify-start'>
+    <div className='flex items-center justify-start'>
       <div className='mr-3 h-[50px] w-[50px]'>
         <Avatar src={commentUser.profileImage} size='50' />
       </div>
       <div className='flex items-center bg-blue-500 text-white rounded-r-full rounded-bl-full relative'>
-        <div className=' px-5 py-2 break-words max-w-[300px]'>{title}</div>
-        {user &&
-          (user?.id === commentUser.id ? null : commentLikes.find(
-              (item) => item.userId === user.id && item.commentId === id
-            ) ? (
-            <div onClick={handleUnClickLike}>
-              <LikeIcon liked={true} />
-            </div>
-          ) : (
-            <div className='pr-2' onClick={handleClickLike}>
-              <LikeIcon liked={false} />
-            </div>
-          ))}
+        <div className=' pl-5 mr-5 py-2 break-words max-w-[300px]'>{title}</div>
+
         {commentLikes?.filter((item) => item.commentId === id).length === 0 ? (
           ''
         ) : (
-          <div className='w-5 mr-1 text-center'>
-            {commentLikes?.filter((item) => item.commentId === id).length}
+          <div className='w-5 mr-3 text-center font-bangers'>
+            +{commentLikes?.filter((item) => item.commentId === id).length}
           </div>
         )}
-
-        {commentUser.id === user?.id ? (
+      </div>
+      {user &&
+        (user?.id === commentUser.id ? null : commentLikes.find(
+            (item) => item.userId === user.id && item.commentId === id
+          ) ? (
           <button
-            onClick={
-              user?.role === 'ADMIN'
-                ? () => adminDeleteComment(id)
-                : () => deleteComment(id, user?.id)
-            }
-            className='text-white rounded-full absolute -right-9'
+            className='pl-2 text-white active:animate-bounce'
+            onClick={handleUnClickLike}
           >
-            <TrashIcon />
-          </button>
-        ) : user?.role === 'ADMIN' ? (
-          <button
-            onClick={
-              user?.role === 'ADMIN'
-                ? () => adminDeleteComment(id)
-                : () => deleteComment(id, user?.id)
-            }
-            className='text-white rounded-full absolute -right-9'
-          >
-            <TrashIcon />
+            <LikeIcon liked={true} />
           </button>
         ) : (
-          ''
-        )}
-      </div>
+          <button
+            className='pl-2 text-white active:animate-bounce'
+            onClick={handleClickLike}
+          >
+            <LikeIcon liked={false} />
+          </button>
+        ))}
+      {commentUser.id === user?.id ? (
+        <button
+          onClick={
+            user?.role === 'ADMIN'
+              ? () => adminDeleteComment(id)
+              : () => deleteComment(id, user?.id)
+          }
+          className='text-white pl-2 rounded-full'
+        >
+          <TrashIcon />
+        </button>
+      ) : user?.role === 'ADMIN' ? (
+        <button
+          onClick={
+            user?.role === 'ADMIN'
+              ? () => adminDeleteComment(id)
+              : () => deleteComment(id, user?.id)
+          }
+          className='text-white pl-2 rounded-full'
+        >
+          <TrashIcon />
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

@@ -6,7 +6,7 @@ function LikeIcon({ liked }) {
       viewBox='0 0 24 24'
       strokeWidth='1.5'
       stroke='currentColor'
-      className={`w-6 h-6 ${liked ? 'text-white fill-current' : ''}`}
+      className={`w-6 h-6 ${liked ? 'text-yellow-500 fill-current' : ''}`}
     >
       <path
         strokeLinecap='round'

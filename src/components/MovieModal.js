@@ -97,28 +97,30 @@ function MovieModal({
             ''
           )}
         </div>
-        <div
-          onClick={
-            watchlists.find(
+        {user && (
+          <div
+            onClick={
+              watchlists.find(
+                (item) => item.userId === user.id && item.movieId === id
+              )
+                ? removeWatchlist
+                : addWatchlist
+            }
+            className={`text-white text-center mx-auto p-3 mt-5 rounded-md font-bangers text-lg fadein active:scale-95  transition-all cursor-pointer ${
+              watchlists.find(
+                (item) => item.userId === user.id && item.movieId === id
+              )
+                ? 'w-48 bg-yellow-500 active:bg-yellow-600'
+                : 'w-36 bg-green-500 active:bg-green-600'
+            }`}
+          >
+            {watchlists.find(
               (item) => item.userId === user.id && item.movieId === id
             )
-              ? removeWatchlist
-              : addWatchlist
-          }
-          className={`text-white text-center mx-auto p-3 mt-5 rounded-md font-bangers text-lg fadein active:scale-95  transition-all cursor-pointer ${
-            watchlists.find(
-              (item) => item.userId === user.id && item.movieId === id
-            )
-              ? 'w-48 bg-yellow-500 active:bg-yellow-600'
-              : 'w-36 bg-green-500 active:bg-green-600'
-          }`}
-        >
-          {watchlists.find(
-            (item) => item.userId === user.id && item.movieId === id
-          )
-            ? 'Remove from watchlist'
-            : 'Add to watchlist'}
-        </div>
+              ? 'Remove from watchlist'
+              : 'Add to watchlist'}
+          </div>
+        )}
       </div>
       <div
         className='p-5 w-[500px] rounded-lg flex flex-col justify-end fadein'
