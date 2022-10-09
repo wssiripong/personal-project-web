@@ -1,6 +1,7 @@
 import Modal from '../components/Modal';
 import MovieContainer from '../components/MovieContainer';
 import ProfileModal from '../components/ProfileModal';
+import SearchModal from '../components/SearchModal';
 import { useAuth } from '../context/AuthContext';
 import { useMovie } from '../context/MovieContext';
 import AddMovie from '../features/AddMovie';
@@ -17,11 +18,11 @@ function Home() {
     openProfileModal
   } = useAuth();
 
-  const { openAddMovie, toggleAddMovie } = useMovie();
+  const { openAddMovie, toggleAddMovie, search, toggleSearch } = useMovie();
 
   return (
-    <div className=' bg-teal-800 h-[100vh] flex justify-center items-center'>
-      <div className='container h-[100vh] py-10 px-10'>
+    <div className='flex justify-center items-center'>
+      <div className='container h-full py-10 px-10'>
         <MovieContainer />
         <Modal
           title='Login'
@@ -49,6 +50,7 @@ function Home() {
           close={toggleAddMovie}
         />
         <ProfileModal open={openProfileModal} close={toggleProfileModal} />
+        <SearchModal open={search} close={toggleSearch} />
       </div>
     </div>
   );

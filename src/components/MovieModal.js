@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useMovie } from '../context/MovieContext';
 import CommentContainer from '../features/comment/CommentContainer';
 import * as watchlistService from '../api/watchlistApi';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function MovieModal({
   open,
@@ -24,6 +24,7 @@ function MovieModal({
 
   useEffect(() => {
     fetchWatchlist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async () => {
@@ -47,11 +48,8 @@ function MovieModal({
 
   const handleDeleteWatchlist = async () => {
     try {
-      const res = await watchlistService.deleteWatchlist(id);
-      const newWatchlists = watchlists.filter(
-        (item) => item.movieId !== id && item.userId !== user.id
-      );
-      updateWatchlists(newWatchlists);
+      await watchlistService.deleteWatchlist(id);
+      fetchWatchlist();
     } catch (err) {
       console.log(err);
     }

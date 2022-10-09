@@ -22,14 +22,14 @@ import PersonIcon from '../../components/svg/PersonIcon';
 
 function Navbar() {
   const { user, logout, toggleLogin, toggleProfileModal } = useAuth();
-  const { toggleAddMovie, selectCategory, category } = useMovie();
+  const { toggleAddMovie, selectCategory, category, toggleSearch } = useMovie();
 
   return (
     <div className='fixed top-0 left-0 w-[250px] bottom-0 bg-teal-900 p-5 shadow-md border-r-teal-700 border-r-2'>
       <div className='text-teal-300 p-5 flex flex-col items-center gap-3 font-bangers text-lg'>
         <div className='text-4xl text-blue-300'>SCREENTALK</div>
         <div className='border-[1px] border-teal-700 w-full my-3'></div>
-        <div className='hover:scale-125'>
+        <div onClick={toggleSearch} className='hover:scale-125'>
           <SearchIcon />
         </div>
         <div

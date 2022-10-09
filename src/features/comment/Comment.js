@@ -72,7 +72,7 @@ function Comment({
           ''
         ) : (
           <div className='w-5 mr-3 text-center font-bangers'>
-            +{commentLikes?.filter((item) => item.commentId === id).length}
+            + {commentLikes?.filter((item) => item.commentId === id).length}
           </div>
         )}
       </div>

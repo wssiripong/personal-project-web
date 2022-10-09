@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import * as userService from '../api/userApi';
-import * as watchlistService from '../api/watchlistApi';
 import Avatar from './Avatar';
 import { useLoading } from '../context/LoadingContext';
 import SaveIcon from './svg/SaveIcon';
@@ -126,11 +125,13 @@ function ProfileModal({ open, close }) {
         </div>
         <div className='border-2 w-full my-3'></div>
         {edit ? (
-          <input
-            type='text'
-            placeholder={user.email}
-            className='w-80 p-2 text-base font-sans text-center text-black outline-blue-500 rounded-lg'
-          />
+          <div className='flex justify-center'>
+            <input
+              type='text'
+              placeholder={user.email}
+              className='w-80 p-2 text-base font-sans text-center text-black outline-blue-500 rounded-lg'
+            />
+          </div>
         ) : (
           <div className='text-center'>{user.email}</div>
         )}
@@ -171,6 +172,8 @@ function ProfileModal({ open, close }) {
                   </div>
                 </div>
               );
+            } else {
+              return null;
             }
           })}
           <MovieModal
