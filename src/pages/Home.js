@@ -21,7 +21,7 @@ function Home() {
   const { openAddMovie, toggleAddMovie, search, toggleSearch } = useMovie();
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center h-screen bg-teal-800'>
       <div className='container h-full py-10 px-10'>
         <MovieContainer />
         <Modal

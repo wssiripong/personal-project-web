@@ -35,11 +35,13 @@ function MovieContainer() {
                     </div>
                   </div>
                 );
+              } else {
+                return null;
               }
             })
           : movies?.map((item) => (
               <div
-                className='h-60 w-40 shadow-2xl hover:scale-110 transition-all ease-in-out relative'
+                className='h-60 w-40 shadow-2xl hover:scale-110 transition-all ease-in-out relative rounded-lg'
                 key={item.id}
                 item={item}
                 onClick={() => viewMovie(item)}
@@ -57,6 +59,7 @@ function MovieContainer() {
         <MovieModal
           open={isOpen}
           movieInfo={pick}
+          editPick={(input) => setPick(input)}
           close={() => setIsOpen(false)}
         />
       </div>

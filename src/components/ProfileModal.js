@@ -8,6 +8,7 @@ import PhotoIcon from './svg/PhotoIcon';
 import EditIcon from './svg/EditIcon';
 import { useMovie } from '../context/MovieContext';
 import MovieModal from './MovieModal';
+import LoadingModal from './LoadingModal';
 
 function ProfileModal({ open, close }) {
   const [edit, setEdit] = useState(false);
@@ -17,6 +18,7 @@ function ProfileModal({ open, close }) {
     email: '',
     profileImage: null
   });
+  const [file, setFile] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [pick, setPick] = useState({});
   const { user, getMe } = useAuth();
@@ -63,6 +65,7 @@ function ProfileModal({ open, close }) {
       onClick={() => {
         setEdit(false);
         setEditInput({});
+        setFile(null);
         close();
       }}
     >
@@ -70,7 +73,10 @@ function ProfileModal({ open, close }) {
         onClick={(e) => e.stopPropagation()}
         className='z-10 relative fadein'
       >
-        <Avatar src={user?.profileImage} size='150' />
+        <Avatar
+          src={file ? URL.createObjectURL(file) : user?.profileImage}
+          size='150'
+        />
         {edit && (
           <div>
             <div className='absolute top-0 left-0 h-[150px] w-[150px] backdrop-blur-3xl rounded-full'></div>
@@ -84,9 +90,10 @@ function ProfileModal({ open, close }) {
               type='file'
               className='hidden'
               ref={selectFileEl}
-              onChange={(e) =>
-                setEditInput({ ...editInput, profileImage: e.target.files[0] })
-              }
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+                setEditInput({ ...editInput, profileImage: e.target.files[0] });
+              }}
             />
           </div>
         )}
@@ -183,6 +190,7 @@ function ProfileModal({ open, close }) {
           />
         </div>
       </div>
+      {loading && <LoadingModal />}
     </div>
   );
 }

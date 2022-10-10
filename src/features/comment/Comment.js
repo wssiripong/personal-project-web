@@ -3,6 +3,7 @@ import * as commentLikeService from '../../api/commentLikeApi';
 import Avatar from '../../components/Avatar';
 import LikeIcon from '../../components/svg/LikeIcon';
 import TrashIcon from '../../components/svg/TrashIcon';
+import UserModal from '../../components/UserModal';
 import { useAuth } from '../../context/AuthContext';
 
 function Comment({
@@ -12,6 +13,7 @@ function Comment({
 }) {
   const [commentLikes, setCommentLikes] = useState([]);
   const [commentUser, setCommentUser] = useState({});
+  const [openUserModal, setOpenUserModal] = useState(false);
 
   const { getUser, user } = useAuth();
 
@@ -62,7 +64,10 @@ function Comment({
 
   return (
     <div className='flex items-center justify-start'>
-      <div className='mr-3 h-[50px] w-[50px]'>
+      <div
+        onClick={() => setOpenUserModal(true)}
+        className='mr-3 h-[50px] w-[50px]'
+      >
         <Avatar src={commentUser.profileImage} size='50' />
       </div>
       <div className='flex items-center bg-blue-500 text-white rounded-r-full rounded-bl-full relative'>
@@ -119,6 +124,11 @@ function Comment({
       ) : (
         ''
       )}
+      <UserModal
+        open={openUserModal}
+        close={() => setOpenUserModal(false)}
+        commentUser={commentUser}
+      />
     </div>
   );
 }

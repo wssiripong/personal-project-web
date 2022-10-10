@@ -10,18 +10,20 @@ function MovieContextProvider({ children }) {
   const [watchlists, setWatchlists] = useState([]);
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState(false);
+  const [movieLikes, setMovieLikes] = useState([]);
+
+  const fetchMovies = async () => {
+    try {
+      const resMovies = await movieService.getAllMovies();
+      setMovies(resMovies.data.movies);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const resMovies = await movieService.getAllMovies();
-        setMovies(resMovies.data.movies);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchMovies();
-  }, [watchlists]);
+  }, [watchlists, movieLikes]);
 
   const toggleAddMovie = () => {
     setOpenAddMovie((prev) => !prev);
@@ -54,6 +56,10 @@ function MovieContextProvider({ children }) {
     setSearch((prev) => !prev);
   };
 
+  const updateMovieLikes = (input) => {
+    setMovieLikes(input);
+  };
+
   return (
     <MovieContext.Provider
       value={{
@@ -69,7 +75,10 @@ function MovieContextProvider({ children }) {
         category,
         selectCategory,
         search,
-        toggleSearch
+        toggleSearch,
+        fetchMovies,
+        updateMovieLikes,
+        movieLikes
       }}
     >
       {children}
