@@ -32,7 +32,7 @@ function UserModal({ open, close, commentUser }) {
         className='bg-teal-500 p-5 rounded-lg text-white font-bangers text-3xl -mt-14 pt-[70px] relative fadein'
         onClick={(e) => e.stopPropagation()}
       >
-        <div className='flex gap-5 justify-center'>
+        <div className='flex gap-5 justify-center text-yellow-300'>
           <div>{commentUser.firstName}</div>
           <div>{commentUser.lastName}</div>
         </div>

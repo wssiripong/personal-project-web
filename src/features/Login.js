@@ -37,27 +37,28 @@ function Login({ toggleLogin, toggleRegister }) {
                   username: e.target.value
                 })
               }
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
               placeholder='username'
             />
           </div>
           <div className='w-full'>
             <input
+              type='password'
               value={loginUser.password}
               onChange={(e) =>
                 setLoginUser({ ...loginUser, password: e.target.value })
               }
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
               placeholder='password'
             />
           </div>
-          <button className='bg-blue-500 w-full h-10 text-lg text-white'>
+          <button className='bg-blue-500 w-full h-10 text-lg text-white rounded-lg shadow-md active:scale-95 font-bangers'>
             Login
           </button>
           <button
             type='button'
             onClick={handleRegisterOpen}
-            className='bg-green-500 w-full h-10 text-lg text-white'
+            className='bg-green-500 w-full h-10 text-lg text-white rounded-lg shadow-md active:scale-95 font-bangers'
           >
             Register
           </button>

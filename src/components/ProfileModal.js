@@ -114,7 +114,7 @@ function ProfileModal({ open, close }) {
               className='w-36 p-2 text-base font-sans text-center text-black outline-blue-500 rounded-lg'
             />
           ) : (
-            <div>{user.firstName}</div>
+            <div className='text-yellow-300'>{user.firstName}</div>
           )}
           {edit ? (
             <input
@@ -127,7 +127,7 @@ function ProfileModal({ open, close }) {
               className='w-36 p-2 text-base font-sans text-center text-black outline-blue-500 rounded-lg'
             />
           ) : (
-            <div>{user.lastName}</div>
+            <div className='text-yellow-300'>{user.lastName}</div>
           )}
         </div>
         <div className='border-2 w-full my-3'></div>

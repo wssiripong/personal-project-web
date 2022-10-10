@@ -197,11 +197,13 @@ function MovieModal({
 
             <div
               onClick={
-                movieLikes?.find(
-                  (item) => item.movieId === id && item.userId === user.id
-                )
-                  ? handleRemoveMovieLike
-                  : handleAddMovieLike
+                user
+                  ? movieLikes?.find(
+                      (item) => item.movieId === id && item.userId === user.id
+                    )
+                    ? handleRemoveMovieLike
+                    : handleAddMovieLike
+                  : null
               }
               className='flex justify-center items-center mt-2 mb-5 text-white text-2xl font-bangers relative cursor-pointer active:scale-90'
             >

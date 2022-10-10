@@ -178,11 +178,17 @@ function Navbar() {
         </div>
         <div className='border-[1px] border-teal-700 w-full my-3'></div>
         {user && (
-          <div
-            onClick={toggleProfileModal}
-            className='cursor-pointer w-[80px] h-[80px]'
-          >
-            <Avatar size='80' src={user.profileImage} />
+          <div className='flex flex-col justify-center items-center gap-3'>
+            <div
+              onClick={toggleProfileModal}
+              className='cursor-pointer w-[80px] h-[80px]'
+            >
+              <Avatar size='80' src={user.profileImage} />
+            </div>
+            <div className='flex gap-3 text-2xl text-yellow-300'>
+              <div>{user.firstName}</div>
+              <div>{user.lastName}</div>
+            </div>
           </div>
         )}
       </div>

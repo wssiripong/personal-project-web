@@ -84,11 +84,11 @@ function AddMovie() {
             type='text'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='h-10 text-center outline-blue-500'
+            className='h-10 text-center outline-blue-500 rounded-lg shadow-lg'
             placeholder='title'
           />
           <select
-            className='h-10 text-center outline-blue-500 text-gray-400'
+            className='h-10 text-center outline-blue-500 text-gray-400 rounded-lg shadow-lg'
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value=''>choose category</option>
@@ -106,7 +106,7 @@ function AddMovie() {
             <option value={CATEGORY_TV_SHOWS}>TV Shows</option>
           </select>
           <textarea
-            className='h-20 text-center outline-blue-500'
+            className='h-20 text-center outline-blue-500 rounded-lg shadow-lg'
             placeholder='description'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -123,7 +123,7 @@ function AddMovie() {
           />
 
           {loading ? (
-            <button className='flex justify-center items-center bg-blue-500 h-10 text-white'>
+            <button className='flex justify-center items-center bg-blue-500 h-10 text-white rounded-lg shadow-lg'>
               <div role='status'>
                 <SpinIcon />
                 <span className='sr-only'>Loading...</span>
@@ -135,16 +135,12 @@ function AddMovie() {
               <button
                 type='button'
                 onClick={() => fileEl.current.click()}
-                className='bg-blue-500 h-10 text-white'
+                className='bg-blue-500 h-10 text-white rounded-lg shadow-lg active:scale-95'
               >
                 {coverImage ? 'file selected' : 'upload image'}
               </button>
-              <button className='bg-yellow-500 h-10 text-white'>Submit</button>
-              <button
-                onClick={toggleAddMovie}
-                className='bg-red-500 h-10 text-white'
-              >
-                Cancel
+              <button className='bg-yellow-500 h-10 text-white rounded-lg shadow-lg active:scale-95'>
+                Submit
               </button>
             </div>
           )}

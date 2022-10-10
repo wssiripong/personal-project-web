@@ -9,11 +9,11 @@ function Modal({ title, body, open, close }) {
       onClick={close}
     >
       <div
-        className=' bg-slate-200 p-5 w-[350px] fadein'
+        className=' bg-teal-300 p-5 w-[350px] rounded-xl fadein'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='text-center pb-5'>
-          <div className='text-3xl'>{title}</div>
+          <div className='text-3xl font-bangers text-teal-800'>{title}</div>
         </div>
         <div>{body}</div>
       </div>

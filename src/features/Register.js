@@ -41,21 +41,23 @@ function Register({ toggleLogin, toggleRegister }) {
                 setRegisterUser({ ...registerUser, username: e.target.value })
               }
               placeholder='username'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
           <div className='flex justify-center'>
             <input
+              type='password'
               value={registerUser.password}
               onChange={(e) =>
                 setRegisterUser({ ...registerUser, password: e.target.value })
               }
               placeholder='password'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
           <div className='flex justify-center'>
             <input
+              type='password'
               value={registerUser.confirmPassword}
               onChange={(e) =>
                 setRegisterUser({
@@ -64,7 +66,7 @@ function Register({ toggleLogin, toggleRegister }) {
                 })
               }
               placeholder='confirm password'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
           <div className='flex justify-center'>
@@ -74,7 +76,7 @@ function Register({ toggleLogin, toggleRegister }) {
                 setRegisterUser({ ...registerUser, firstName: e.target.value })
               }
               placeholder='first name'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
           <div className='flex justify-center'>
@@ -84,7 +86,7 @@ function Register({ toggleLogin, toggleRegister }) {
                 setRegisterUser({ ...registerUser, lastName: e.target.value })
               }
               placeholder='last name'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
           <div className='flex justify-center'>
@@ -94,16 +96,16 @@ function Register({ toggleLogin, toggleRegister }) {
                 setRegisterUser({ ...registerUser, email: e.target.value })
               }
               placeholder='email'
-              className='h-10 w-full text-center outline-blue-500'
+              className='h-10 w-full text-center outline-blue-500 rounded-xl shadow-md'
             />
           </div>
-          <button className='bg-green-500 w-full h-10 text-lg text-white'>
+          <button className='bg-green-500 w-full h-10 text-lg text-white rounded-xl shadow-md font-bangers active:scale-95'>
             Register
           </button>
           <button
             type='button'
             onClick={handleReturnLogin}
-            className='bg-blue-500 w-full h-10 text-lg text-white'
+            className='bg-blue-500 w-full h-10 text-lg text-white rounded-xl shadow-md font-bangers active:scale-95'
           >
             Already Have An Account
           </button>
